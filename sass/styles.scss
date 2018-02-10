@@ -1,0 +1,635 @@
+@import 'global/_reset.scss';
+@import 'global/_fonts.scss';
+@import 'global/_vars.scss';
+@import 'global/_classes.scss';
+@import 'blocks/modal-window.scss';
+
+/* === Block === header-navigation-wrapper === */
+
+.header-navigation-wrapper {
+	display: flex;
+	flex-direction: column;
+	@include tablet {
+		background: url(../img/head-bg.jpg) no-repeat center;
+		background-size: cover;
+	}
+}
+
+/* === End of block === header-navigation-wrapper === */
+
+
+/* === Block === head-logo === */
+
+.head-logo {
+	text-align: center;
+	font-size: 0;
+	@include tablet {
+		min-height: 400px
+	}
+	@include desktop {
+		min-height: 640px
+	}
+	& a {
+		background: url("../img/logo.png") no-repeat center;
+		padding: 40px 120px;
+		display: inline-block;
+		@include tablet {
+			background: url("../img/logo-tablet.png") no-repeat center;
+			padding: 70px 190px;
+			margin-top: 30px;
+		}
+		@include desktop {
+			background: url("../img/desktop-logo.png") no-repeat center;
+			padding: 80px 190px;
+			margin-top: 45px;
+		}
+	}
+}
+
+/* === End of block === head-logo === */
+
+
+/* === Block === navigation === */
+
+.navigation {
+	position: relative;
+	@include tablet {
+		order: -1;
+		background: #000000;
+	}
+}
+
+.navitagtion__top {
+	display: flex;
+	align-items: center;
+	background-color: #826550;
+
+}
+
+.navigation__titile {
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	line-height: 50px;
+	font-weight: 700;
+	letter-spacing: .7px;
+	display: inline-block;
+	flex-grow: 1;
+	padding-left: 70px;
+	@include tablet{
+		display: none;
+	}
+}
+
+.navigation__btn {
+	border: none;
+	width: 70px;
+	height: 50px;
+	cursor: pointer;
+	&:focus {
+		outline: none;
+	}
+	@include tablet {
+		display: none;
+	};
+}
+
+.js-navigation__btn--close {
+	background: url(../img/btn-cross.png) no-repeat center;
+	background-color: #6a4d38;
+	order: -1;
+}
+
+.js-navigation__btn--open {
+	background: url(../img/btn.png) no-repeat center;
+	background-color: #6a4d38;
+	order: 1;
+}
+
+/* === End of block === navigation === */
+
+
+/* === Block === menu === */
+
+.menu {
+	margin-left: 70px;
+	&:before {
+		position: absolute;
+		box-shadow: inset 10px -6px 15px -5px #4e3929;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 20px;
+		content: "";
+		cursor: pointer;
+		pointer-events: none;
+		@include tablet {
+			display: none;
+		}
+	}
+	@include tablet {
+		position: relative;
+		left: 0;
+		box-shadow: none;
+		width: 100%;
+		background: #000000;
+		@include container;
+	};
+
+.menu__list {
+		@include tablet {
+			display: flex;
+			justify-content: space-between;
+		};
+	}
+
+.menu__item {
+		border-bottom: 1px solid #71543f;
+		border-top: 1px solid #886e5b;
+		text-transform: uppercase;
+		background-color: #826550;
+		width: 100%;
+		@include tablet {
+			width: auto;
+			border: none;
+			background-color: #000000;
+			&--selected {
+				position: relative;
+				border-bottom: 2px solid #826550;
+			}
+		};
+		&--login {
+			border: none;
+			background: url(../img/login.png) no-repeat 8px 10px; 
+			background-color: #6a4d38;
+			text-transform: none;
+			@include tablet {
+				padding-left: 15px;
+				box-shadow: none;
+				background-color: #000000;
+				background: url(../img/login.png) no-repeat center left; 
+			};
+		}
+		&:hover {
+			@include tablet {
+				background-color: #1f1f1f;
+			}
+		}
+	}
+}
+
+.menu__link {
+	color: white;
+	display: block;
+	line-height: 49px;
+	padding-left: 15px;
+	cursor: pointer;
+	&--padding-size {
+		padding-bottom: 50px;
+		padding-left: 40px;
+	}
+	@include tablet {
+		line-height: 1;
+		padding: 20px;
+	}
+}
+
+.js-menu--openned {
+	@include mobile {
+		position: absolute;
+		z-index: 10;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
+.js-menu--closed {
+	@include mobile {
+		visibility: hidden;
+	}
+}
+
+.js-menu--nojs {
+	@include mobile {
+		margin-left: 0;
+		position: relative;
+		visibility: visible;
+		top: -50px;
+	}
+} 
+
+/* === End of block === menu === */
+
+
+/* === Block === statistic === */
+
+.statistic {
+	display: flex;
+	flex-direction: column;
+	@include tablet {
+		@include container;
+		position: relative;
+	}
+	@include desktop {
+		flex-direction: row;
+		margin-top: -160px;
+		justify-content: center;
+	}
+}
+
+.statistic__note {
+	&--top {
+		color: #cacaca;
+		display: none;
+		@include tablet {
+			display: block;
+			padding: 0 30px;
+		}
+		@include desktop {
+			position: absolute;
+			bottom: 20px;
+		}
+	}
+	&--bottom {
+		color: #7f7f7f;
+		text-align: center;
+		margin: 10px;
+		@include tablet {
+			display: none;
+		}
+	}
+}
+
+.statistic__wrap {
+	padding: 32px 20px 30px 20px;
+	background: white;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	@include tablet {
+		flex-direction: row;
+		min-height: 180px;
+		margin-top: -180px;
+		padding: 22px;
+		align-items: center;
+	}
+	@include desktop {
+		margin-top: 0;
+		flex-direction: row;
+		flex-wrap: wrap;
+		flex-basis: 360px;
+		padding: 0;
+	}
+}
+
+.statistic__title {
+	font-weight: 700;
+	font-size: 22px;
+	text-transform: uppercase;
+	text-align: center;
+	@include tablet {
+		flex-basis: 50%;
+		font-size: 28px;
+		padding: 10px 30px;
+		text-align: left;
+	}
+	@include desktop {
+		flex-basis: 100%;
+	}
+}
+
+.statistic__descr {
+	text-align: center;
+	@include tablet {
+		flex-basis: 50%;
+		padding: 10px 30px;
+		text-align: left;
+	}
+	@include desktop {
+		flex-basis: 100%;
+		align-self: flex-start;
+	}
+}
+
+/* === End of block === statistic === */
+
+
+/* === Block === achivments === */
+
+.achivments {
+	display: flex;
+	flex-direction: column;
+	@include tablet {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	@include desktop {
+		flex-basis: 640px;
+	}
+}
+
+.achivments__item {
+	color: white;
+	background: #4e4e4e;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 70px;
+	padding: 0 20px;
+	&:nth-child(3) {
+		background: #353535;
+	}
+	&:nth-child(1) {
+		background: #353535;
+	}
+	@include tablet {
+		flex-basis: 50%;
+		flex-direction: column;
+		min-height: 160px;
+		align-items: flex-start;
+		justify-content: center;
+		padding-left: 50px;
+		&:nth-child(1) {
+			background: #404040;
+		}
+		&:nth-child(2) {
+			background: #4e4e4e;
+		}
+		&:nth-child(3) {
+			background: #353535;
+		}
+		&:nth-child(4) {
+			background: #404040;
+		}
+	}
+}
+
+.achivments__number {
+	font-size: 26px;
+	@include tablet {
+		font-size: 58px;
+		flex-basis: 1px;
+		& abbr {
+			font-size: 20px;
+			position: relative;
+			top: -25px;
+		}
+	}
+}
+
+.achivments__descr {
+	font-size: 14px;
+	text-align: right;
+	@include tablet {
+		flex-basis: 1px;
+		font-size: 18px;
+	}
+}
+
+/* === End of block === achivments === */
+
+
+/* === Block === advantages === */
+
+.advantages {
+	@include container;
+	position: relative;
+	max-width: 1240px;
+	padding-bottom: 24px;
+	@include desktop {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}
+
+.advantages__item {
+	color: white;
+	text-align: center;
+	clear: both;
+	margin: 20px 20px;
+	@include mobile {
+		position: absolute;
+		right: 1000px;
+		&--selected {
+			position: relative;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+		}
+	}
+	@include tablet {
+		text-align: left;
+		position: relative;
+		padding: 15px 0;
+		margin: 45px 20px;
+		&:after {
+			position: absolute;
+			background: #4a4a4a;
+			width: 85%;
+			height: 2px;
+			content: "";
+			bottom: -22px;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+		}
+	}
+	@include desktop {
+		text-align: center;
+		margin: 25px 26px;
+		flex-basis: 25%;
+		flex-grow: 1;
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.advantages__image {
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+	@include tablet {
+		float: left;
+		margin: 0 38px 0 0;
+	}
+	@include desktop {
+		float: none;
+		margin: 10px 0;
+	}
+}
+
+.advantages__title {
+	font-size: 22px;
+	text-transform: uppercase;
+	font-weight: bold;
+
+}
+
+.advantages__text {
+	@include tablet {
+		margin-left: 135px;
+	}
+	@include desktop {
+		margin-left: 0;
+	}
+}
+
+.advantages__pointers-wrap {
+	color: white;
+	text-align: center;
+	@include tablet {
+		display: none;
+	}
+}
+
+.advantages__pointer {
+	background-color: transparent;
+	border: none;
+	padding: 4px;
+	margin: 6px 8px;
+	cursor: pointer;
+	outline: #cccccc;
+	border: #969696 1px solid;
+	transform: rotate(135deg);
+	&--selected {
+		background-color: white;
+		transform: rotate(135deg);
+		padding: 4px;
+		margin: 6px 8px;
+		border: #cccccc 1px solid;
+	}
+}
+
+/* === End of block === advantages === */
+
+
+/* === Block === News === */
+
+.news {
+	background: white;
+	padding: 30px 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 1250px;
+	margin: 0 auto;
+	@include tablet {
+		padding: 35px 64px;
+	}
+	@include desktop {
+		padding: 40px 120px;
+	}
+}
+
+.news__title {
+	font-weight: bold;
+	font-size: 26px;
+	text-transform: uppercase;
+	margin: 10px;
+	@include tablet {
+		order: -1;
+		flex-grow: 1;
+	}
+	@include desktop {
+		padding-left: 55px;
+	}
+}
+.news__items-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	@include tablet {
+		margin-top: 25px;
+	}
+}
+
+.news__item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin: 20px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e5ddd5;
+	transition: opacity .3s ease-out;
+	@include tablet {
+		flex-basis: 40%;
+		flex-grow: 1;
+		margin: 20px 0;
+		&:nth-child(2n) {
+			margin-left: 60px;
+		}
+		&:last-child {
+			flex-grow: 0;
+			flex-basis: 45%;
+		}
+	}
+	@include desktop {
+		flex-basis: 29%;
+		margin: 3% 2%;
+		flex-grow: 0;
+		&:nth-child(2n) {
+			margin: 3% 2%;
+		}
+		&:last-child {
+			flex-grow: 0;
+			flex-basis: 29%;
+		}
+	}
+}
+
+.js-news__item--hidden {
+	visibility: hidden;
+	position: absolute;
+	opacity: 0;
+}
+
+.news__date {
+	flex-basis: 50px;
+	text-align: center;
+	background: black;
+	color: white;
+	margin: 0 15px 0 0;
+	text-transform: uppercase;
+	padding: 15px 0 5px 0;
+	line-height: 18px;
+	font-size: 12px;
+	&--bigger {
+		font-size: 28px;
+	}
+}
+
+.news__text {
+	flex-basis: 70%;
+	flex-grow: 1;
+}
+
+.news__btn {
+	border: 2px solid #e5ddd5;
+	background: #f8f5f2;
+	transition: background .3s;
+	-ms-align-self: center;
+	align-self: center;
+	& a {
+		width: 160px;
+		line-height: 40px;
+		display: block;
+		text-align: center;
+		color: black;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 11px;
+	}
+	&:hover {
+		background: #e5ddd5;
+	}
+	@include tablet {
+		order: -1;
+	}
+}
+
+/* === End of block === News === */
+

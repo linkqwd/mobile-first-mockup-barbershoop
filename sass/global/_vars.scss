@@ -1,0 +1,45 @@
+$main-color: white;
+$desktop: 1200px;
+$tablet: 768px;
+$mobile: 767px;
+
+/* Breakpoints */
+@mixin mobile () {
+	@media screen and (max-width: $mobile) {
+		@content;
+	}
+};
+
+@mixin tablet () {
+	@media screen and (min-width: $tablet) {
+		@content;
+	}
+};
+
+@mixin desktop () {
+	@media screen and (min-width: $desktop) {
+		@content;
+	}
+};
+
+/* Container sizes */
+
+@mixin container () {
+	margin: 0 auto;
+	padding: 0 20px;
+	@include tablet {
+		padding: 0 64px;
+	}
+	@include desktop {
+		padding: 0 120px;
+	}
+}
+
+@mixin respond () {
+	transition: opacity .3s;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.8;
+		box-shadow: 2px 2px 8px 1px #DDDDDD;
+	}
+}

@@ -1,0 +1,23 @@
+* {
+	box-sizing: border-box;
+}
+
+.visually-hidden {
+	visibility: hidden;
+	position: absolute;
+}
+
+#news-anchor {
+	visibility: hidden;
+}
+
+.js-popup-login {
+	display: none;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+	background: #242424;
+	font-family: firasans;
+}

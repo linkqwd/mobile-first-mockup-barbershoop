@@ -1,0 +1,121 @@
+.modal-window {
+	position: fixed;
+	top:0;
+	left: 0;
+	bottom:0;
+	width: 100%;
+}
+
+.modal-window__content {
+	position: absolute;
+	margin: 90px auto;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+/* BLOCK  == MODAL-PAGE == */
+
+.modal-page {
+	background: #f8f5f2;
+	padding: 20px;
+	margin: 0 auto;
+	max-width: 320px;
+	box-sizing: content-box;
+	@include tablet {
+		padding: 30px 64px;
+		box-shadow: 2px 2px 50px 0px black;
+	}
+}
+
+.modal-page__row-wrapper {
+	margin: 20px 0;
+	&--flex {
+		display: flex;
+		align-items: center;
+	}
+}
+.modal-page__wrap-divider {
+	flex-grow: 1;
+}
+
+.modal-page__title {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 30px;
+	margin: 10px 0;
+}
+
+.modal-page__descr {
+	text-align: center;
+	font-size: 14px;
+}
+
+.modal-page__login {
+	display: block;
+	margin: 10px 0;
+}
+
+.modal-page__password {
+	display: block;
+	margin: 10px 0;
+}
+
+.modal-page__inputs {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #e5ddd5;
+}
+
+.modal-page__remember-me {
+	font-size: 14px;
+}
+
+.modal-page__remember-me-check-box {
+	background: #ffffff;
+	border: 1px solid #e5ddd5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding: 15px;
+	transform: translateY(35%);
+	margin-right: 5px;
+	cursor: pointer;
+	&:checked {
+		background: #4e4e4e;
+	}
+}
+
+.modal-page__link-forget-paswd {
+	color: black;
+	text-decoration: underline;
+	text-align: right;
+	margin-top: 13px;
+	font-size: 14px;
+	display: block;
+}
+
+.modal-page__enter-btn {
+	background: #826550;
+	color: white;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 50px;
+	flex-basis: 50%;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.modal-page__exit-btn {
+	background: #f8f5f2;
+	border: 1px solid #e5ddd5;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 50px;
+	flex-basis: 50%;
+	margin-left: 10px;
+	cursor: pointer;
+}	
