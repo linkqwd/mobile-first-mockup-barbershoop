@@ -18,6 +18,7 @@ var files = {
 	}
 }
 
+gulp.task('default', ['watch']);
 
 gulp.task('watch', ['browser-sync', 'sass', 'scripts'], function() {
 	gulp.watch('src/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
@@ -77,6 +78,10 @@ gulp.task('img', function() {
 		}))/**/)
 });
 
+gulp.task('clear', function (callback) {
+	return cache.clearAll();
+});
+
 /* Build-production rules */
 
 gulp.task('build', ['clean', 'img', 'sass', 'css-minify', 'js-minify'], function() {
@@ -99,15 +104,6 @@ gulp.task('build', ['clean', 'img', 'sass', 'css-minify', 'js-minify'], function
 gulp.task('clean', function() {
 	return del.sync('dist'); // Удаляем папку dist перед сборкой
 });
-
-
-
-gulp.task('clear', function (callback) {
-	return cache.clearAll();
-});
-
-gulp.task('default', ['watch']);
-
 
 /* Github */
 
