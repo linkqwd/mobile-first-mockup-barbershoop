@@ -11,13 +11,13 @@ pngquant     = require('imagemin-pngquant'), // Подключаем библи�
 cache        = require('gulp-cache'), // Подключаем библиотеку кеширования
 autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
 
+var files = {
+	js: {
+		main: 'src/js/main.js',
+		jquery: 'src/libs/jquery/dist/jquery.js'
+	}
+}
 
-gulp.task('sass', function() {
-	gulp.src('src/sass/styles.scss')
-	.pipe(sass({outputStyle: 'compact'}).on('error', sass.logError)) // Преобразуем sass в CSS посредством gulp-sass
-	.pipe(gulp.dest('src/css')) // Выгружаем результата в папку src/css
-	.pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
-});
 
 gulp.task('watch', ['browser-sync', 'sass', 'scripts'], function() {
 	gulp.watch('src/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
@@ -34,13 +34,27 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 	});
 });
 
+gulp.task('sass', function() {
+	gulp.src('src/sass/styles.scss')
+	.pipe(sass({outputStyle: 'compact'}).on('error', sass.logError)) // Преобразуем sass в CSS посредством gulp-sass
+	.pipe(gulp.dest('src/css/')) // Выгружаем результата в папку src/css
+	.pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
+});
 
 gulp.task('scripts', function() {
 	return gulp.src([ // Берем все необходимые библиотеки
-		'src/libs/jquery/dist/jquery.min.js', // Берем jQuery
-		'src/libs/jQuery.mmenu/dist/jquery.mmenu.all.min.js'
+			files.js.jquery // Берем jQuery
 		])
-		.pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
+		.pipe(concat('libs.js')) // Собираем в новом файле libs.min.js
+		.pipe(gulp.dest('src/js')); // Выгружаем в папку src/js
+});
+
+gulp.task('js-minify', function() {
+	return gulp.src([ // Берем все необходимые библиотеки
+			files.js.jquery, // Берем jQuery
+			files.js.main // Берем main.js
+		])
+		.pipe(concat('scripts.min.js')) // Собираем в новом файле scripts.min.js
 		.pipe(uglify()) // Сжимаем JS файл
 		.pipe(gulp.dest('src/js')); // Выгружаем в папку src/js
 });
@@ -50,7 +64,6 @@ gulp.task('css-minify', function() {
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // Создаем префиксы
 		.pipe(gcmq()) // Группировка медиа-запросов
 		.pipe(cleanCss()) // Сжимаем
-		.pipe(gulp.dest('dist/css')); // Выгружаем в папку src/css
 });
 
 gulp.task('img', function() {
@@ -62,26 +75,59 @@ gulp.task('img', function() {
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		}))/**/)
-		.pipe(gulp.dest('dist/img')); // Выгружаем на продакшен
 });
 
-gulp.task('build', ['clean', 'img', 'sass', 'css-minify', 'scripts'], function() {
-	var buildFonts = gulp.src('src/fonts/**/*') // Переносим шрифты в продакшен
-	.pipe(gulp.dest('dist/fonts'))
+/* Build-production rules */
 
-	var buildJs = gulp.src('src/js/**/*') // Переносим скрипты в продакшен
-	.pipe(gulp.dest('dist/js'))
+gulp.task('build', ['clean', 'img', 'sass', 'css-minify', 'js-minify'], function() {
+	var buildFonts = gulp.src('src/fonts/**/*') // Переносим шрифты в продакшен
+	.pipe(gulp.dest('dist/fonts/'))
+
+	var buildJs = gulp.src('src/js/scripts.min.js') // Переносим скрипты в продакшен
+	.pipe(gulp.dest('dist/js/'))
 
 	var buildHtml = gulp.src('src/*.html') // Переносим HTML в продакшен
-	.pipe(gulp.dest('dist'));
-});
+	.pipe(gulp.dest('dist/'));
 
-gulp.task('clear', function (callback) {
-	return cache.clearAll();
-})
+	var buildHtml = gulp.src('src/img/**/*') // Переносим изображения в git dist
+	.pipe(gulp.dest('dist/img/'));
+
+	var buildHtml = gulp.src('src/css/styles.css') // Переносим CSS в git dist
+	.pipe(gulp.dest('dist/css/'));
+});
 
 gulp.task('clean', function() {
 	return del.sync('dist'); // Удаляем папку dist перед сборкой
 });
 
+
+
+gulp.task('clear', function (callback) {
+	return cache.clearAll();
+});
+
 gulp.task('default', ['watch']);
+
+
+/* Github */
+
+gulp.task('github', ['cleanGit', 'img', 'sass', 'css-minify', 'js-minify'], function() {
+	var gitFonts = gulp.src('src/fonts/**/*') // Переносим шрифты в git doc
+	.pipe(gulp.dest('docs/fonts/'))
+
+	var gitJs = gulp.src('src/js/scripts.min.js') // Переносим скрипты в git docs
+	.pipe(gulp.dest('docs/js/'))
+
+	var gitHtml = gulp.src('src/*.html') // Переносим HTML в git docs
+	.pipe(gulp.dest('docs/'));
+
+	var gitHtml = gulp.src('src/img/**/*') // Переносим изображения в git docs
+	.pipe(gulp.dest('docs/img/'));
+
+	var gitHtml = gulp.src('src/css/styles.css') // Переносим CSS в git docs
+	.pipe(gulp.dest('docs/css/'));
+});
+
+gulp.task('cleanGit', function() {
+	return del.sync('docs'); // Удаляем папку dist перед сборкой
+});

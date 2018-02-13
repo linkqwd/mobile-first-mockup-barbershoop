@@ -20,7 +20,6 @@
     "gulp-group-css-media-queries": "^1.2.0",
     "imagemin-pngquant": "^5.0.1",
     "browser-sync": "^2.18.13",
-    "del": "^3.0.0",
-    "smart-grid": "^2.0.1"
+    "del": "^3.0.0"
   }
 }

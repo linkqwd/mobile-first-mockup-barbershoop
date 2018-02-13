@@ -1,5 +1,6 @@
 /node_modules/
-/libs/
+/dist/
+/src/libs/*
 /.git/
 /**/*.psd
 /**/Thumbs.db
